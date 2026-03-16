@@ -12,31 +12,34 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   return (
-    <AuthContextProvider>
-      <GestureHandlerRootView>
-        <QueryClientProvider client={queryClient}>
-          <Stack screenOptions={{
-              headerShown: false,
-              head: () => (
-                <>
-                  <script
-                    dangerouslySetInnerHTML={{
-                      __html: `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/vwe3l09u1e';y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, 'clarity', 'script', 'vwe3l09u1e');`
-                    }}
-                  />
-                </>
-              ),
-            }}
-            >
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen
-              name="modal"
-              options={{ presentation: "modal", title: "Modal" }}
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        head: () => (
+          <>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/vwe3l09u1e';y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, 'clarity', 'script', 'vwe3l09u1e');`
+              }}
             />
-          </Stack>
-          <StatusBar style="auto" />
-        </QueryClientProvider>
-      </GestureHandlerRootView>
-    </AuthContextProvider>
+          </>
+        ),
+      }}
+    >
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="modal"
+        options={{ presentation: "modal", title: "Modal" }}
+      />
+
+      {/* Wrap your providers INSIDE the layout */}
+      <AuthContextProvider>
+        <GestureHandlerRootView>
+          <QueryClientProvider client={queryClient}>
+            <StatusBar style="auto" />
+          </QueryClientProvider>
+        </GestureHandlerRootView>
+      </AuthContextProvider>
+    </Stack>
   );
 }
